@@ -1,0 +1,32 @@
+package com.kgisl.parseexbeen;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
+
+class Appnew{
+    private static final String Collectors = null;
+
+	public static void main(String[] args) {
+        
+        String txtFileName = "src/main/resources/cave.csv";
+        List<String> list = new ArrayList<>();
+        
+               // reading csv file into stream, try-with-resources
+               try (Stream<String> emp = Files.lines(Paths.get(txtFileName))) {
+                list=emp.collect(Collectors.toList());
+                
+                //    list.forEach(System.out::println);
+                   Set<String> uniqueEmployee = list.stream().distinct().collect(Collectors.toSet());
+                   System.out.println("Employee List(Unique)");
+                   uniqueEmployee.forEach(System.out::println);
+        
+               } catch (IOException ioe) {
+                   ioe.printStackTrace();
+               }
+    }
+}
